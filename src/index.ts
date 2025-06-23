@@ -50,12 +50,15 @@ class ActionTracker {
 
     /* Core Methods */
     private getOrCreateId(storageKey: string, prefix: string): string {
-        const storedId = localStorage.getItem(storageKey);
-        if (storedId) return storedId;
-
-        const newId = prefix + Math.random().toString(36).substr(2, 9);
-        localStorage.setItem(storageKey, newId);
-        return newId;
+        try {
+            const storedId = localStorage.getItem(storageKey);
+            if (storedId) return storedId;
+            const newId = prefix + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem(storageKey, newId);
+            return newId;
+        } catch {
+            return prefix + Math.random().toString(36).substr(2, 9);
+        }
     }
 
     private generateId(prefix: string = '', length: number = 8): string {
