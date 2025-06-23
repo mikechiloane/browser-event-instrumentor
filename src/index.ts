@@ -244,14 +244,6 @@ class ActionTracker {
     }
 
     private newSession(): void {
-
-        if (this.sessionId) {
-            if (this.config.debug) {
-                console.log('Session already exists:', this.sessionId);
-            }
-            return;
-        }
-
         this.sessionId = this.generateId('ses-', 12);
         this.sessionStart = Date.now();
         if (this.config.debug) {
